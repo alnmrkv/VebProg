@@ -1,22 +1,21 @@
 var main = function() {
     "use strict";
-    $(".tabs a:nth-child(1)").on("click" ,function(){
-        $(".tabs span").removeClass("active"); //удаляем активные классы
-        $(".tabs a:nth-child(1) span").addClass("active");
-        $("main .content").empty();
+    var makeTabActive  = function (tabNumber){
+        var tabSelector = ".tabs a:nth-child(" + tabNumber + ") span";
+    $(".tabs span").removeClass("active");
+    $(tabSelector).addClass("active");
+    };
+    $(".tabs a:nth-child(1)").on("click", function () {
+        makeTabActive(1);
         return false;
-    })
-    $(".tabs a:nth-child(2)").on("click" ,function(){
-        $(".tabs span").removeClass("active"); //удаляем активные классы
-        $(".tabs a:nth-child(2) span").addClass("active");
-        $("main .content").empty();
+    });
+    $(".tabs a:nth-child(2)").on("click", function () {
+        makeTabActive(2);
         return false;
-    })
-    $(".tabs a:nth-child(3)").on("click" ,function(){
-        $(".tabs span").removeClass("active"); //удаляем активные классы
-        $(".tabs a:nth-child(3) span").addClass("active");//делаем активной вкладку
-        $("main .content").empty();//очищаем для переопрделения
-        return false;//не переходим по ссылке
-    })
+    });
+    $(".tabs a:nth-child(3)").on("click", function () {
+        makeTabActive(3);
+        return false;
+    });
 }
 $(document).ready(main);
