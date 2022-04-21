@@ -8,6 +8,9 @@ var main = function() {
         "Обновить несколько новых задач",
         "Купить продукты"
     ];
+    var toDos = toDoObjects.map(function(toDo) {
+        return toDo.description;
+    })
 
     $(".tabs a span").toArray().forEach(function(element) {
         $(element).on("click", function() {
@@ -36,8 +39,8 @@ var main = function() {
                 $("main .content").append($content)
 
             } else if ($element.parent().is(":nth-child(3)")) {
-
-                var $input = $("<input>");
+//обработчик событий для кнопки
+                var $input = $("<input>"); 
                 var $button = $("<button>").text("+")
                 $button.on("click", function() {
                     toDos.push($input.val());
@@ -52,4 +55,8 @@ var main = function() {
     $(".tabs a:first-child span").trigger("click");
 };
 
-$(document).ready(main);
+$(document).ready(function(){
+    jQuery.getJSON("todos.json", function(toDoObjects) {
+        main(toDoObjects);
+});
+})
