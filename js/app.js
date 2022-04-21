@@ -1,16 +1,9 @@
-var main = function() {
+var main = function(toDoObjects) {
     "use strict";
-    var toDos = [
-        "Закончить писать эту книгу",
-        "Вывести Грейси на прогулку в парк",
-        "Ответить на электронные письма",
-        "Подготовиться к лекции в понедельник",
-        "Обновить несколько новых задач",
-        "Купить продукты"
-    ];
+    
     var toDos = toDoObjects.map(function(toDo) {
         return toDo.description;
-    })
+    });
 
     $(".tabs a span").toArray().forEach(function(element) {
         $(element).on("click", function() {
@@ -39,7 +32,6 @@ var main = function() {
                 $("main .content").append($content)
 
             } else if ($element.parent().is(":nth-child(3)")) {
-//обработчик событий для кнопки
                 var $input = $("<input>"); 
                 var $button = $("<button>").text("+")
                 $button.on("click", function() {
@@ -56,7 +48,7 @@ var main = function() {
 };
 
 $(document).ready(function(){
-    jQuery.getJSON("todos.json", function(toDoObjects) {
+    $.getJSON("todos.json", function(toDoObjects) {
         main(toDoObjects);
-});
+    });
 })
