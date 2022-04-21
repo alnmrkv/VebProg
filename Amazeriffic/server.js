@@ -29,6 +29,14 @@ toDos = [{
 
 app.use(express.static(__dirname+"/client"));
 http.createServer(app).listen(3000);
+app.use(express.urlencoded({ extended: true }));
+app.post("/todos", function(req, res) {
+    var newToDO = req.body;
+    console.log(newToDO);
+    toDos.push(newToDO);
+    res.json({"message": "Вы размещаетесь на сервере!"});
+});
+
 app.get("/todos.json", function(req, res){
     res.json(toDos);
 });

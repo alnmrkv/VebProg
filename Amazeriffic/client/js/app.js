@@ -63,19 +63,19 @@ var main = function(toDoObjects) {
                 $button.on("click", function() {
                     var description = $input.val(),
                         tags = $tagInput.val().split(",");
-                    toDoObjects.push({ "description": description, "tags": tags });
 
-                    $.post("todos", {}, function(response){
-                        console.log("Мы отправили данные и получили ответ сервера!");
-                        console.log(response);
+                    var newToDo = ({ "description": description, "tags": tags });
+
+                    $.post("todos", newToDo, function(result){
+                        console.log(result);
+                        toDoObjects.push(newToDo);
+                        
+                        toDos = toDoObjects.map(function(toDo) {
+                            return toDo.description;
+                        });
+                        $input.val("");
+                        $tagInput.val("");
                     });
-
-                    toDos = toDoObjects.map(function(toDo) {
-                        return toDo.description;
-                    });
-
-                    $input.val("");
-                    $tagInput.val("");
                 });
             }
             return false;
